@@ -32,9 +32,70 @@ To write a program for mean, variance and cross correlation in SCILAB and verify
 
 
 ## PROGRAM
+```
+clc; clear;
 
+function y=f(x)
+    y = x * 3 * (1-x)^2;
+endfunction
+
+EX = intg(0,1,f);
+
+function y=g(y1)
+    y = y1 * 3 * (1-y1)^2;
+endfunction
+
+EY = intg(0,1,g);
+
+disp(EX, "i) Mean of X = ");
+disp(EY, "   Mean of Y = ");
+
+function y=f2(x)
+    y = (x^2) * 3 * (1-x)^2;
+endfunction
+
+EX2 = intg(0,1,f2);
+
+vX2 = EX2 - (EX^2);
+
+function y=g2(y1)
+    y = (y1^2) * 3 * (1-y1)^2;
+endfunction
+
+EY2 = intg(0,1,g2);
+
+vY2 = EY2 - (EY^2);
+
+disp(vX2, "ii) Variance of X = ");
+disp(vY2, "    Variance of Y = ");
+
+x= evstr(input("Type in the reference sequence (e.g. [1 2 3]): "));
+y = evstr(input("Type in the second sequence (e.g. [2 4 6]): "));
+
+x = x(:)';
+y = y(:)';
+
+N = length(x);
+M = length(y);
+
+xc = conv(x, y($:-1:1));
+lags = -(M-1):(N-1);
+
+disp([lags' xc'], "Lag   Cross-correlation");
+
+clf();
+plot2d3(lags, xc);
+xtitle("Full Cross-correlation");
+xlabel("Lag");
+ylabel("Correlation");
+```
 ## CALCULATION
+![WhatsApp Image 2025-11-23 at 11 33 04_0402b6b1](https://github.com/user-attachments/assets/c616761f-b0b8-4b50-befa-5701e8441413)
+
+![WhatsApp Image 2025-11-23 at 11 33 04_04205155](https://github.com/user-attachments/assets/0f2dad9e-8bb4-40f9-ad3a-8acd92a31bc9)
 
 ## OUTPUT
+<img width="1622" height="967" alt="AC EXP5" src="https://github.com/user-attachments/assets/599ffcaf-b4b2-42f2-9ddc-3c8ce8263a5e" />
 
 ## RESULT
+Thus the mean , variance and cross correlation are executed in Scilab and output is verified.
